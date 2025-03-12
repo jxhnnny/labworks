@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Animation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #111;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            padding: 50px;
+        }
+        .box {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            background: #222;
+            margin: 20px auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        }
+        .box.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Scroll Down to See the Effect</h1>
+        <div class="box">Hello, I'm animating!</div>
+        <div class="box">Smooth scrolling animations!</div>
+        <div class="box">Easy to customize and expand!</div>
+        <div class="box">Works on all modern browsers!</div>
+    </div>
+    
+    <script>
+        const boxes = document.querySelectorAll('.box');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        boxes.forEach(box => observer.observe(box));
+    </script>
+</body>
+</html>
